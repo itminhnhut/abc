@@ -1,0 +1,48 @@
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+#sortable tr { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable tr td { margin-left: -1.3em; }
+.ui-state-default td:nth-child(2){width: 150px !important;}
+.ui-state-default td:nth-child(2)>.img-thumbnail{width: 90px !important;height: auto !important;}
+.menu-box {
+  border: 1px solid #a1a1a1;
+  margin: 10px;
+  padding: 10px;
+}
+.menu-box ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu-box ul.menu-list li {
+  display: block;
+  margin-bottom: 5px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+.menu-box ul.menu-list > li a {
+  background: #fff;
+  display: block;
+  font-size: 14px;
+  color: red;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px;
+}
+.menu-box ul.menu-list > li a:hover {
+  cursor: move;
+}
+.menu-box ul.menu-list ul {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+.menu-box ul.menu-list ul li a {
+  color: blue;
+}
+.menu-box li.menu-highlight {
+  border: 1px dashed red !important;
+  background: #f5f5f5;
+}
+/*  froduct */
+.form-create-product .form-select{padding-left: 0px !important;}
+.productImage tr td.image-thumb{width: 150px !important;}
+.productImage tr td.image-thumb.img-thumbnail{width: 90px !important;height: auto !important;}
