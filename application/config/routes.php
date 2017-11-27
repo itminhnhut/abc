@@ -156,6 +156,16 @@ $route['cart/destroy']               =  'cart/destroyCustomer';
 /**
  *  page
  */
-$route['ci-admin/pages']              = 'ci_pages/index';
-$route['ci-admin/page/create']        = 'ci_pages/createPage';
+$route['ci-admin/pages']                        = 'ci_pages/index';
+$route['ci-admin/page/create']                  = 'ci_pages/createPage';
+$route['ci-admin/pages/data-pages']             = 'ci_pages/dataPages';
+$route['ci-admin/pages/delete']                 = 'ci_pages/delete';
+$route['ci-admin/page/edit/(:num)']             = 'ci_pages/edit/$1';
+$route['ci-admin/page/content/create']          = 'ci_pages/createPageContent';
+$route['ci-admin/pages/contents']               = 'ci_pages/PagesContents';
+$route['ci-admin/pages/dataPagesContents']      = 'ci_pages/dataPagesContents';
+$route['ci-admin/pages/contentdelete']          = 'ci_pages/PagesContentDelete';
+$route['ci-admin/pages/content/edit/(:num)']    = 'ci_pages/PagesContentEdit/$1';
+
+
 

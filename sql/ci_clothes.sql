@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2017-11-25 11:30:56
+Date: 2017-11-27 21:31:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -79,6 +79,26 @@ INSERT INTO `cart` VALUES ('2', '2', '10000', '4', '2');
 INSERT INTO `cart` VALUES ('3', '619', '61000', '1', '3');
 INSERT INTO `cart` VALUES ('4', '619', '61000', '1', '4');
 INSERT INTO `cart` VALUES ('5', '1', '20000', '4', '5');
+
+-- ----------------------------
+-- Table structure for content_page
+-- ----------------------------
+DROP TABLE IF EXISTS `content_page`;
+CREATE TABLE `content_page` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `idPage` tinyint(3) NOT NULL,
+  `content` text CHARACTER SET utf8 NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `keyword` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `status` tinyint(3) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of content_page
+-- ----------------------------
+INSERT INTO `content_page` VALUES ('1', 'liên hệ đến tôi', '2', '<p>đây là trang liên hệ của tôi 1</p>\r\n', 'aaa 1', 'aa1 1', '1');
 
 -- ----------------------------
 -- Table structure for customer
@@ -184,6 +204,25 @@ INSERT INTO `menu` VALUES ('8', 'Quần áo người lớn 8', 'Quần áo ngư�
 INSERT INTO `menu` VALUES ('9', 'Quần áo người lớn 9', 'Quần áo người lớn 10', 'Quần áo người lớn 10', 'Quần áo người lớn 10', 'quan-ao-nguoi-lon-10', '', '', '0', '0', '5', '5', '0', '1');
 
 -- ----------------------------
+-- Table structure for pages
+-- ----------------------------
+DROP TABLE IF EXISTS `pages`;
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `status` tinyint(3) NOT NULL COMMENT 'xuất hiện ở menu',
+  `show_hiden` tinyint(3) NOT NULL COMMENT 'ẩn hiện',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pages
+-- ----------------------------
+INSERT INTO `pages` VALUES ('2', 'liên hệ', 'lien-he', '1', '1');
+INSERT INTO `pages` VALUES ('4', 'thanh toán', 'thanh-toan', '1', '1');
+
+-- ----------------------------
 -- Table structure for product
 -- ----------------------------
 DROP TABLE IF EXISTS `product`;
@@ -213,7 +252,7 @@ INSERT INTO `product` VALUES ('1', 'áo thun nam', 'ao-thun-nam', '1', '2', '4',
 INSERT INTO `product` VALUES ('2', 'áo thun nam-1', 'ao-thun-nam-1', '1', '2', '4', '', '<p>áo thun nam</p>\r\n', '', '', 'áo thun nam 1', '70000', '0', '2017-11-23 16:28:22', '1');
 INSERT INTO `product` VALUES ('3', 'áo thun nam-2', 'ao-thun-nam-2', '1', '2', '4', '', '<p>áo thun nam</p>\r\n', '', '', 'áo thun nam 2', '80000', '0', '2017-11-23 16:28:22', '1');
 INSERT INTO `product` VALUES ('4', 'áo thun nam-3', 'ao-thun-nam-3', '1', '2', '4', '', '<p>áo thun nam</p>\r\n', '', '', 'áo thun nam 3', '90000', '0', '2017-11-23 16:28:22', '1');
-INSERT INTO `product` VALUES ('5', 'áo thun nam 4', 'ao-thun-nam-4', '1', '2', '4', '', '<p>áo thun nam</p>\r\n', '', '', 'áo thun nam 3', '100000', '0', '2017-11-23 16:28:22', '1');
+INSERT INTO `product` VALUES ('5', 'áo thun nam 4', 'ao-thun-nam-4', '1', '8', '7', '', '<p>áo thun nam</p>\r\n', '', '', 'áo thun nam 3', '100000', '0', '2017-11-25 14:27:51', '1');
 
 -- ----------------------------
 -- Table structure for slider

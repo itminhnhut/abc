@@ -37,7 +37,6 @@
           $length = intval($this->input->get("length"));
       $query = $this->db->select('id, name, slug, status, status_menu_img')->order_by('order_menu','asc')->get('menu');
 
-      $row = array();
       $data = array();
 
       foreach($query->result_array() as $key =>$value)

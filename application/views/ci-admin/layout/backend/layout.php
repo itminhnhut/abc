@@ -121,7 +121,7 @@ else:
                   <li><a href="<?php echo base_url('ci-admin/pages'); ?>" class="">Pages</a></li>
                   <li><a href="<?php echo base_url('ci-admin/page/create'); ?>" class="">Create Page</a></li>
                   <li><a href="<?php echo base_url('ci-admin/content/page'); ?>" class="">Content Pages</a></li>
-                  <li><a href="<?php echo base_url('ci-admin/create/pages'); ?>" class="">Create Content Page</a></li>
+                  <li><a href="<?php echo base_url('ci-admin/page/content/create'); ?>" class="">Create Content Page</a></li>
                   
                 </ul>
               </div>
@@ -282,7 +282,68 @@ else:
       });
 
       $('#dataPages').DataTable( {
-        "ajax": "<?php echo base_url('ci-admin/c/data-bill') ?>"
+        "ajax": "<?php echo base_url('ci-admin/pages/data-pages') ?>"
+      });
+      $('#dataPagesContents').DataTable( {
+        "ajax": "<?php echo base_url('ci-admin/pages/dataPagesContents') ?>"
+      });
+      
+      /**
+       * 
+       */
+      $("#dataPagesContents").on("click", ".pagescontentdelete #pagescontentdelete", function(){
+        var table = $('#dataPagesContents').DataTable();
+        var mydata = $(this).attr('value');
+        var name = $(this).attr('data');
+        var conf=confirm("Are you sure you want to delet this : "+name);
+        if(conf){
+           var row = $(this).parents('tr');
+          // table.row( $(this).parents('tr') ).remove().draw();
+           $.ajax({
+              type : "post",
+              url: "<?php echo base_url('ci-admin/pages/contentdelete') ?>",
+              data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>','idcontent':mydata},
+              async:false,
+              success: function(data){
+                   if(data ==1)
+                   {
+                       row.remove();
+                   }
+               }
+           });
+        }
+        else {
+          return false;
+        }
+      });
+
+      /**
+       * 
+       */
+      $("#dataPages").on("click", ".pagedelete #pagedelete", function(){
+        var table = $('#dataPages').DataTable();
+        var mydata = $(this).attr('value');
+        var name = $(this).attr('data');
+        var conf=confirm("Are you sure you want to delet this : "+name);
+        if(conf){
+           var row = $(this).parents('tr');
+          // table.row( $(this).parents('tr') ).remove().draw();
+           $.ajax({
+              type : "post",
+              url: "<?php echo base_url('ci-admin/pages/delete') ?>",
+              data: {'<?php echo $this->security->get_csrf_token_name(); ?>':'<?php echo $this->security->get_csrf_hash(); ?>','idPages':mydata},
+              async:false,
+              success: function(data){
+                   if(data ==1)
+                   {
+                       row.remove();
+                   }
+               }
+           });
+        }
+        else {
+          return false;
+        }
       });
 
       $("#dataMenu").on("click", ".menudelete #menuDelete", function(){
