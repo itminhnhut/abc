@@ -116,19 +116,138 @@ class Ci_Bill extends CI_Controller {
          'br3' => array('name' => 'View Bill'),
       );
 
+     
       $this->template->breadcrum($breadcrum);
       $this->template->load('layout', 'contents', 'ci-admin/bill/view.php', array('id' => $id, 'data' => $query, 'customer' => $customer, 'csrf' => $this->csrf));
    }
    public function prinfBill() {
+
+    $id = 8;
+    $query = $this->db->select('c.price as price, quantity,p.name As nameProdcut,discount')
+                    ->from('product AS p ,cart As c , customer AS ct,bill AS b')
+                    ->where('p.id = c.idProduct and c.idBill = b.id and ct.id = b.idCustomer')
+                    ->where('b.id', $id)
+                    ->get()
+                    ->result_array();
+
+     $customer = $this->db->select('ct.name as nameCustomer,address,sdt,meno,discount')
+                    ->from('customer AS ct,bill AS b')
+                    ->where('ct.id = b.idCustomer')
+                    ->where('b.id', $id)
+                    ->get()
+                    ->result_array();
 
       $phpWord = new \PhpOffice\PhpWord\PhpWord();
       $phpWord->getCompatibility()->setOoxmlVersion(14);
       $phpWord->getCompatibility()->setOoxmlVersion(15);
       $filename = 'test.docx';
       $section = $phpWord->addSection();
+     
       $section->addText('Hello World! minh nhựt');
       $section->addTextBreak(1);
+      
+      $styleTable = array('borderSize' => 6, 'borderColor' => '006699', 'cellMargin' => 80);
+      $styleFirstRow = array('borderBottomSize' => 18, 'borderBottomColor' => '0000FF', 'bgColor' => '66BBFF');
+      $styleCell = array('valign' => 'center');
+      $styleCellBTLR = array('valign' => 'center', 'textDirection' => \PhpOffice\PhpWord\Style\Cell::TEXT_DIR_BTLR);
+      $fontStyle = array('bold' => true, 'align' => 'center');
+      $fontStyleR = array('bold' => true, 'align' => 'right');
+     
+    /**
+     * 
+    */
+    $section->addText('Thông tin khách hàng',$fontStyle);
+    $phpWord->addTableStyle(' Table', $styleTable);
+    $table = $section->addTable(' Table');
+    foreach ($customer as $key => $value)
+    {
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Tên Khách Hàng', $fontStyleR);
+        $table->addCell(7200)->addText($value['nameCustomer']);
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Địa chỉ', $fontStyleR);
+        $table->addCell(7200)->addText($value['address']);
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Số điện thoại', $fontStyleR);
+        $table->addCell(7200)->addText($value['sdt']);
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Ghi chú', $fontStyleR);
+        $table->addCell(7200)->addText($value['meno']);
+    }
+    /**
+     * 
+     */
+   
+    $section->addTextBreak(1);
+    $section->addText('Thông tin khách hàng',$fontStyle);
+    $phpWord->addTableStyle(' Table', $styleTable);
+    $table = $section->addTable(' Table');
+    foreach ($customer as $key => $value)
+    {
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Tên Khách Hàng', $fontStyleR);
+        $table->addCell(7200)->addText($value['nameCustomer']);
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Địa chỉ', $fontStyleR);
+        $table->addCell(7200)->addText($value['address']);
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Số điện thoại', $fontStyleR);
+        $table->addCell(7200)->addText($value['sdt']);
+        $table->addRow();
+        $table->addCell(2000, $styleCell)->addText('Ghi chú', $fontStyleR);
+        $table->addCell(7200)->addText($value['meno']);
+    }
+    /**
+     * 
+     */
+    $section->addTextBreak(1);
+    $section->addText('Sản phẩm khác hàng',$fontStyle);
+    $phpWord->addTableStyle('Fancy Table', $styleTable, $styleFirstRow);
+    $table = $section->addTable('Fancy Table');
+    $table->addRow(400);
+    $table->addCell(500, $styleCell)->addText('STT', $fontStyle);
+    $table->addCell(6000, $styleCell)->addText('Tên Sản Phẩm', $fontStyle);
+    $table->addCell(1500, $styleCell)->addText('Giá', $fontStyle);
+    $table->addCell(1500, $styleCell)->addText('Số Lượng', $fontStyle);
+    $table->addCell(1500, $styleCell)->addText('Tổng Tiền', $fontStyle);
+    $i = 1;
+    $total = 0;
+    foreach ($query as $key => $value)
+    {
+        $total += $value['price'] * $value['quantity'];
+        $table->addRow();
+        $table->addCell(2000)->addText($i++);
+        $table->addCell(2000)->addText($value['nameProdcut']);
+        $table->addCell(2000)->addText(number_format($value['price']));
+        $table->addCell(2000)->addText($value['quantity']);
+        $table->addCell(2000)->addText(number_format($value['quantity'] * $value['price']));
+        if($i ==(count($query)+1)):
+          $table->addRow();
+          $table->addCell(2000)->addText();
+          $table->addCell(2000)->addText();
+          $table->addCell(2000)->addText();
+          $table->addCell(2000)->addText('Tổng Tiền');
+          $table->addCell(2000)->addText(number_format($total));
+        endif;
+        if(($value['discount'] >0)&& $i ==(count($query)+1)) :
+            $table->addRow();
+            $table->addCell(2000)->addText();
+            $table->addCell(2000)->addText();
+            $table->addCell(2000)->addText();
+            $table->addCell(2000)->addText('Giảm Giá');
+            $table->addCell(2000)->addText($value['discount'].' %');
 
+            $table->addRow();
+            $table->addCell(2000)->addText();
+            $table->addCell(2000)->addText();
+            $table->addCell(2000)->addText();
+            $table->addCell(2000)->addText('Tổng Tiền');
+            $table->addCell(2000)->addText(number_format($total - (($total*$value['discount'])/100)));
+        endif;
+    }
+    /**
+     * 
+     */
       $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
       $objWriter->save($filename);
       // send results to browser to download

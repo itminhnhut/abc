@@ -135,11 +135,11 @@ class Cart extends CI_Controller
                       );
 
                       $this->db->insert('cart', $data);
-                    if ($this->db->trans_status() === true) {
-                               $this->cart->destroy();
-                               redirect(base_url());
-                    }
                 }
+                if ($this->db->trans_status() === true) {
+                    $this->cart->destroy();
+                    redirect(base_url());
+         }
             } else {
                 $this->template->masterlayoutFondend('layout', 'contents', 'layouts/font_end/customer', array('csrf'=>$this->csrf));
             }

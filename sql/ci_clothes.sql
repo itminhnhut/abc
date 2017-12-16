@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2017-11-27 21:31:42
+Date: 2017-12-16 17:50:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,7 +48,7 @@ CREATE TABLE `bill` (
   `discount` int(100) NOT NULL,
   `status` tinyint(3) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of bill
@@ -57,6 +57,9 @@ INSERT INTO `bill` VALUES ('1', '1', '10', '1');
 INSERT INTO `bill` VALUES ('3', '2', '0', '0');
 INSERT INTO `bill` VALUES ('4', '3', '0', '0');
 INSERT INTO `bill` VALUES ('5', '4', '0', '0');
+INSERT INTO `bill` VALUES ('6', '5', '0', '0');
+INSERT INTO `bill` VALUES ('7', '6', '0', '0');
+INSERT INTO `bill` VALUES ('8', '7', '0', '0');
 
 -- ----------------------------
 -- Table structure for cart
@@ -69,7 +72,7 @@ CREATE TABLE `cart` (
   `quantity` int(100) NOT NULL,
   `idBill` int(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cart
@@ -79,6 +82,10 @@ INSERT INTO `cart` VALUES ('2', '2', '10000', '4', '2');
 INSERT INTO `cart` VALUES ('3', '619', '61000', '1', '3');
 INSERT INTO `cart` VALUES ('4', '619', '61000', '1', '4');
 INSERT INTO `cart` VALUES ('5', '1', '20000', '4', '5');
+INSERT INTO `cart` VALUES ('6', '619', '61000', '1', '6');
+INSERT INTO `cart` VALUES ('7', '1', '20000', '1', '7');
+INSERT INTO `cart` VALUES ('8', '1', '20000', '1', '8');
+INSERT INTO `cart` VALUES ('9', '2', '70000', '1', '8');
 
 -- ----------------------------
 -- Table structure for content_page
@@ -113,7 +120,7 @@ CREATE TABLE `customer` (
   `meno` varchar(100) NOT NULL,
   `create_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of customer
@@ -122,6 +129,9 @@ INSERT INTO `customer` VALUES ('1', 'nhut', 'test', '', '1667423434', 'test', '2
 INSERT INTO `customer` VALUES ('2', 'aaaaa', 'ttttt', 'itnguyenhominhnhut@gmail.com', '1667423430', 'ttttt', '2017-11-20 16:55:23');
 INSERT INTO `customer` VALUES ('3', 'adsaaa', 'ttt', 'itnguyenhominhnhut@gmail.com', '1667423434', 'aaaaa', '2017-11-20 16:56:23');
 INSERT INTO `customer` VALUES ('4', 'nhut', 'aaa', 'itnguyenhominhnhut@gmail.com', '1667423434', 'aaaaa', '2017-11-24 16:11:47');
+INSERT INTO `customer` VALUES ('5', 'nguyen ho minh nhut', 'tphcm', 'itnguyenhominhnhut@gmail.com', '1667423434', 'hahahaa', '2017-12-04 14:42:10');
+INSERT INTO `customer` VALUES ('6', 'devs nhut', 'tphcm', 'itnguyenhominhnhut@gmail.com', '1667423434', 'kakakaa', '2017-12-04 14:45:20');
+INSERT INTO `customer` VALUES ('7', 'aaaaa', 'aaaaa', 'aaaaa@gmail.com', '1667423434', 'aaaaa', '2017-12-04 14:51:43');
 
 -- ----------------------------
 -- Table structure for imagefooter
